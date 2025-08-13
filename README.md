@@ -7,6 +7,6 @@ Projeto de campanha de doaçoes(Donation Campaign)
 Solidity, Blockchain, Web3, Remix Ethereum IDE, NodeJS, NextJS, Bootstrap e MetaMask.
 
 # Tarefa(Tasks):
-Criar um backend(Smart Contract)
+Criar um backend: Smart Contract
 
-Criar um Dapp: integracao web3 frontend.
+Criar um Dapp: frontend + integracao web3.

@@ -1,12 +1,22 @@
 "use client"
-
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { doLogin } from "@/service/Web3Service";
 
 export default function Home() {
     const {push} = useRouter();
+    const [message, setMessage] = useState(""); 
+
+   
 
     function btnLoginClick(){
-        push("/create");
+        setMessage("Conectando na carteira... aguarde...")
+        doLogin()
+        .then(account => push("/create"))
+        .catch(err => {
+            console.error(err)
+            setMessage(err.message)
+        })
     }
 
     return (
@@ -14,7 +24,7 @@ export default function Home() {
             <div className="container px-4 py-5">
                 <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
                 <div className="col-6">
-                    <img src="https://luzernecountybar.com/site/wp-content/uploads/2024/03/s268819900234155836_p257_i1_w1200.jpeg" className="d-block mx-lg-auto img-fluid" width="700" height="500"/>
+                    <img src="/donate.jpeg" className="d-block mx-lg-auto img-fluid" width="700" height="500"/>
                 </div>
                 <div className="col-6">
                     <h1 className="display-5 fw-bold text-body-emphasis lh-1 mb-3">Donate Crypto</h1>
@@ -33,9 +43,13 @@ export default function Home() {
                         Conectar com a MetaMask
                     </button>
                     </div>
-                    <div className="alert alert-success p-3 col-12 mt-3" role="alert">
-                        Usuário autenticado com sucesso
-                    </div>
+                    {message ?
+                        <div className="alert alert-success p-3 col-12 mt-3" role="alert">
+                            {message}
+                        </div>
+                        :
+                        <></>
+                    }
                 </div>
                 </div>
             </div>
